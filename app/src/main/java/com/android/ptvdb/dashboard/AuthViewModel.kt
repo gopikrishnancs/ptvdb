@@ -14,6 +14,7 @@ class AuthViewModel(val authRepository: Repository): ViewModel() {
 
     var authResponse: AuthResponse by mutableStateOf(AuthResponse())
     var isLoading: Boolean by mutableStateOf(false)
+    var isAuthSuccess: Boolean by mutableStateOf(false)
 
 
     fun getAuthentication(){
@@ -22,10 +23,12 @@ class AuthViewModel(val authRepository: Repository): ViewModel() {
 
             try {
                 authRepository.getAuth()
+                isAuthSuccess = true
                 isLoading = false
             }
             catch (exception:Exception){
                 authResponse.statusMessage = "Fail"
+                isAuthSuccess = true
                 isLoading = false
             }
 

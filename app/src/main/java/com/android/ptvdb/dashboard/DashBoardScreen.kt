@@ -79,7 +79,7 @@ fun GetAuth(authResponse: AuthResponse, authenticationViewModel: AuthViewModel) 
 
         }
 
-    } else {
+    } else if (authenticationViewModel.isAuthSuccess){
         Column(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
@@ -90,7 +90,7 @@ fun GetAuth(authResponse: AuthResponse, authenticationViewModel: AuthViewModel) 
             Text(
                 text = "Authentication \n${authResponse.statusMessage}",
                 style = TextStyle(
-                    fontSize = 22.sp, color = Color.Green,
+                    fontSize = 22.sp, color = Color.Blue,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.W700
                 )

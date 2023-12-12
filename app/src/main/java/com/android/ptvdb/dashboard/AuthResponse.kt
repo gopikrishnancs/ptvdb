@@ -11,7 +11,7 @@ data class AuthResponse(
 	var statusCode: String = "0",
 
 	@field:SerializedName("status_message")
-	var statusMessage: String = ""
+	var statusMessage: String = "success"
 
 
 )
