@@ -1,4 +1,4 @@
-package com.android.ptvdb.dashboard
+package com.android.ptvdb.tvseries.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,28 +7,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.ptvdb.data.network.Repository
+import com.android.ptvdb.tvseries.data.TvShowResponse
 import kotlinx.coroutines.launch
 
-class AuthViewModel(val authRepository: Repository): ViewModel() {
+class TvShowViewModel(val tvRepository: Repository): ViewModel() {
 
 
-    var authResponse: AuthResponse by mutableStateOf(AuthResponse())
+    var tvResponse: TvShowResponse by mutableStateOf(TvShowResponse(0, null))
     var isLoading: Boolean by mutableStateOf(false)
-    var isAuthSuccess: Boolean by mutableStateOf(false)
+    var isResponseSuccess: Boolean by mutableStateOf(false)
 
 
-    fun getAuthentication(){
+    fun getPopularTvShows(){
         isLoading = true
         viewModelScope.launch {
 
             try {
-                authRepository.getAuth()
-                isAuthSuccess = true
+                tvRepository.getTvShow()
+                isResponseSuccess = true
                 isLoading = false
             }
             catch (exception:Exception){
-                authResponse.statusMessage = "Fail"
-                isAuthSuccess = true
+                tvResponse.page = 0
+                isResponseSuccess = false
                 isLoading = false
             }
 
@@ -36,10 +37,10 @@ class AuthViewModel(val authRepository: Repository): ViewModel() {
     }
 
 }
-class AuthenticationViewModelFactory : ViewModelProvider.Factory {
+class TvShowViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
-            return AuthViewModel(Repository) as T
+        if (modelClass.isAssignableFrom(TvShowViewModel::class.java)) {
+            return TvShowViewModel(Repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -1,4 +1,4 @@
-package com.android.ptvdb.dashboard
+package com.android.ptvdb.dashboard.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,33 +22,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.android.ptvdb.dashboard.data.AuthResponse
+import com.android.ptvdb.dashboard.viewmodel.AuthViewModel
+import com.android.ptvdb.dashboard.viewmodel.AuthenticationViewModelFactory
+import com.android.ptvdb.tvseries.ui.TvShowScreen
+
 
 @Composable
-fun DashBoardScreen(message: String) {
+fun DashBoardScreen() {
 
     val authenticationViewModel: AuthViewModel = viewModel(factory = AuthenticationViewModelFactory())
 
-    if (message.contains("guest", ignoreCase = true)) {
         GetAuth(authResponse = authenticationViewModel.authResponse, authenticationViewModel)
 
-    } else {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Welcome\n$message",
-                style = TextStyle(
-                    fontSize = 22.sp, color = Color.Green,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.W700
-                )
-            )
-        }
-    }
 }
 
 @Composable
@@ -80,6 +66,7 @@ fun GetAuth(authResponse: AuthResponse, authenticationViewModel: AuthViewModel) 
         }
 
     } else if (authenticationViewModel.isAuthSuccess){
+        TvShowScreen()
         Column(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier

@@ -1,4 +1,4 @@
-package com.android.ptvdb.dashboard
+package com.android.ptvdb.dashboard.data
 
 import com.google.gson.annotations.SerializedName
 

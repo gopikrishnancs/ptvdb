@@ -37,7 +37,7 @@ object RetrofitCI {
             .addInterceptor(httpLoggingInterceptor)
             .build()
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl("https://api.themoviedb.org/3/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
