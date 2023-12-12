@@ -7,13 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.ptvdb.data.network.Repository
+import com.android.ptvdb.tvseries.data.PosterResponse
 import com.android.ptvdb.tvseries.data.TvShowResponse
 import kotlinx.coroutines.launch
 
 class TvShowViewModel(val tvRepository: Repository): ViewModel() {
 
 
-    var tvResponse: TvShowResponse by mutableStateOf(TvShowResponse(0, null))
+    var tvResponse: TvShowResponse by mutableStateOf(TvShowResponse())
+    var posterResponse: PosterResponse by mutableStateOf(PosterResponse())
     var isLoading: Boolean by mutableStateOf(false)
     var isResponseSuccess: Boolean by mutableStateOf(false)
 
@@ -23,16 +25,30 @@ class TvShowViewModel(val tvRepository: Repository): ViewModel() {
         viewModelScope.launch {
 
             try {
-                tvRepository.getTvShow()
+                tvResponse = tvRepository.getTvShow()
                 isResponseSuccess = true
                 isLoading = false
             }
             catch (exception:Exception){
-                tvResponse.page = 0
                 isResponseSuccess = false
                 isLoading = false
             }
 
+        }
+    }
+
+    fun getPostersTvShows(){
+        isLoading = true
+        viewModelScope.launch {
+            try {
+                posterResponse = tvRepository.getPosterImages()
+                isResponseSuccess = true
+                isLoading = false
+            }
+            catch (exception:Exception){
+                isResponseSuccess = false
+                isLoading = false
+            }
         }
     }
 
@@ -42,6 +58,6 @@ class TvShowViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(TvShowViewModel::class.java)) {
             return TvShowViewModel(Repository) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException("tv_show_exception")
     }
 }

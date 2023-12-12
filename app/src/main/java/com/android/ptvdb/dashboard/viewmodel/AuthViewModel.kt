@@ -23,7 +23,7 @@ class AuthViewModel(val authRepository: Repository): ViewModel() {
         viewModelScope.launch {
 
             try {
-                authRepository.getAuth()
+                authResponse = authRepository.getAuth()
                 isAuthSuccess = true
                 isLoading = false
             }
@@ -42,6 +42,6 @@ class AuthenticationViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
             return AuthViewModel(Repository) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException("authentication_exception")
     }
 }
