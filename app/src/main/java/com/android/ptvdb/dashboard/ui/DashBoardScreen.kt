@@ -16,24 +16,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.android.ptvdb.dashboard.data.AuthResponse
 import com.android.ptvdb.dashboard.viewmodel.AuthViewModel
 import com.android.ptvdb.dashboard.viewmodel.AuthenticationViewModelFactory
 import com.android.ptvdb.tvseries.ui.TvShowRoute
 
-
+//basic screen class with Basic Retrofit Response to navigate to next screen if the response is success
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun DashBoardScreen() {
 
     val authenticationViewModel: AuthViewModel = viewModel(factory = AuthenticationViewModelFactory())
 
-        GetAuth(authResponse = authenticationViewModel.authResponse, authenticationViewModel)
+        GetAuth(authenticationViewModel)
 
 }
 
 @Composable
-fun GetAuth(authResponse: AuthResponse, authenticationViewModel: AuthViewModel) {
+fun GetAuth(authenticationViewModel: AuthViewModel) {
 
     LaunchedEffect(Unit, block = {
         authenticationViewModel.getAuthentication()

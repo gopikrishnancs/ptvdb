@@ -8,12 +8,12 @@ import androidx.navigation.compose.rememberNavController
 import com.android.ptvdb.dashboard.ui.DashBoardScreen
 
 object Destinations {
-    const val WELCOME = "welcome to ptvdb"
+    const val DASHBOARD = "Dashboard"
 }
 @Composable
 fun NavGraph(navController: NavHostController = rememberNavController()) {
-    NavHost(navController = navController, startDestination = Destinations.WELCOME) {
-        composable(Destinations.WELCOME) {
+    NavHost(navController = navController, startDestination = Destinations.DASHBOARD) {
+        composable(Destinations.DASHBOARD) {
             DashBoardScreen()
         }
     }
