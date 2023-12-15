@@ -1,6 +1,9 @@
+import org.gradle.kotlin.dsl.version
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
     kotlin("kapt") version "1.9.0"
 }
 
