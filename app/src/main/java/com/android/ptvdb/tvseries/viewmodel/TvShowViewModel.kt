@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.ptvdb.data.network.Repository
+import com.android.ptvdb.newdata.datasource.network.Repository
 import com.android.ptvdb.tvseries.data.PosterResponse
 import com.android.ptvdb.tvseries.data.TvShowResponse
 import kotlinx.coroutines.launch

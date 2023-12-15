@@ -1,4 +1,4 @@
-package com.android.ptvdb.data.network
+package com.android.ptvdb.newdata.datasource.network
 
 import com.android.ptvdb.dashboard.data.AuthResponse
 import com.android.ptvdb.tvseries.data.PosterResponse
@@ -16,7 +16,7 @@ object Repository {
         return apiService.getTvShows()
     }
 
-    suspend fun getPosterImages(): PosterResponse{
+    suspend fun getPosterImages(): PosterResponse {
         return apiService.getPostersTvSHow()
     }
 

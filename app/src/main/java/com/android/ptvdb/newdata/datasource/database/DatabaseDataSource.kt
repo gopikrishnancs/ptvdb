@@ -2,8 +2,8 @@ package com.android.ptvdb.newdata.datasource.database
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.android.ptvdb.newdata.newmodel.TvShows
-import com.android.ptvdb.newdata.newmodel.showsAsDatabaseModel
+import com.android.ptvdb.newdata.model.TvShows
+import com.android.ptvdb.newdata.model.showsAsDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

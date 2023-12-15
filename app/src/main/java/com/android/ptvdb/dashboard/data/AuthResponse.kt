@@ -13,5 +13,4 @@ data class AuthResponse(
 	@field:SerializedName("status_message")
 	var statusMessage: String = "success"
 
-
 )

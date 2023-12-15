@@ -1,4 +1,4 @@
-package com.android.ptvdb.data.network
+package com.android.ptvdb.newdata.datasource.network
 
 import android.content.Context
 import com.google.gson.GsonBuilder

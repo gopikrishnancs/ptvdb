@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.ptvdb.dashboard.data.AuthResponse
-import com.android.ptvdb.data.network.Repository
+import com.android.ptvdb.newdata.datasource.network.Repository
 import kotlinx.coroutines.launch
 
 class AuthViewModel(val authRepository: Repository): ViewModel() {

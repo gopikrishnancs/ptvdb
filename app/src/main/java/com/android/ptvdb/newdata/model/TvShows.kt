@@ -1,4 +1,4 @@
-package com.android.ptvdb.newdata.newmodel
+package com.android.ptvdb.newdata.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
