@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Results(
     @SerializedName("adult")
-    var adult: Boolean? = null,
+    var adult: Boolean? = false,
 
     @SerializedName("backdrop_path")
     var backdropPath: String? = null,
