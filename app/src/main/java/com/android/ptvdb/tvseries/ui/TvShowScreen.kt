@@ -44,7 +44,6 @@ import com.android.ptvdb.tvseries.viewmodel.TvShowViewModel
 import com.android.ptvdb.tvseries.viewmodel.TvShowViewModelFactory
 
 private  val showList = mutableListOf<TvShowModel>()
-private var openDetail = mutableListOf<Boolean>()
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar() {
@@ -64,17 +63,13 @@ fun TopBarPreview() {
 }
 
 @Composable
-fun TvShowScreen() {
-    RememberScreen()
-}
-@Composable
-fun RememberScreen(){
+fun TvShowScreen(navigateToSelectedShow: (Int) -> Unit) {
     val tvShowViewModel: TvShowViewModel = viewModel(factory = TvShowViewModelFactory())
-    tvShows(tvResponse = tvShowViewModel.tvResponse, tvShowViewModel)
+    tvShows(tvResponse = tvShowViewModel.tvResponse, tvShowViewModel, navigateToSelectedShow)
 }
 
 @Composable
-fun tvShows(tvResponse: TvShowResponse, tvShowViewModel: TvShowViewModel) {
+fun tvShows(tvResponse: TvShowResponse, tvShowViewModel: TvShowViewModel, navigateToSelectedShow: (Int) -> Unit) {
 
     LaunchedEffect(Unit, block = {
         tvShowViewModel.getPopularTvShows()
@@ -102,7 +97,7 @@ fun tvShows(tvResponse: TvShowResponse, tvShowViewModel: TvShowViewModel) {
         }
 
     } else if (tvResponse.results!=null) {
-        ListDemo(response = tvResponse)
+        ListDemo(response = tvResponse, navigateToSelectedShow)
     } else {
         Text(
             text = "Database error unable to fetch movies",
@@ -114,13 +109,12 @@ fun tvShows(tvResponse: TvShowResponse, tvShowViewModel: TvShowViewModel) {
 }
 
 @Composable
-fun ListDemo(response: TvShowResponse) {
+fun ListDemo(response: TvShowResponse, navigateToSelectedShow: (Int) -> Unit) {
     // Add data to the personsList
 
     for(items in response.results){
         val userRating = items.voteAverage!!.toInt() percentOf items.voteCount!!
-        openDetail.add(false)
-        showList.add(TvShowModel(response.results.indexOf(items), items.name!!, items.posterPath!!, items.adult!!, items.overview!!, items.originalLanguage!!, items.firstAirDate!!, userRating.toString()))
+        showList.add(TvShowModel(items.id!!, items.name!!, items.posterPath!!, items.adult!!, items.overview!!, items.originalLanguage!!, items.firstAirDate!!, userRating.toString()))
     }
 
     // ... Add other names to the list
@@ -143,7 +137,7 @@ fun ListDemo(response: TvShowResponse) {
                             .padding(1.dp)
                     ) {
                         items(showList) { model ->
-                            ListItem(model = model)
+                            ListItem(model = model, onCLickShow = navigateToSelectedShow)
                         }
                     }
                 }
@@ -154,7 +148,7 @@ fun ListDemo(response: TvShowResponse) {
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun ListItem(model: TvShowModel) {
+fun ListItem(model: TvShowModel, onCLickShow: (Int) -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -163,11 +157,8 @@ fun ListItem(model: TvShowModel) {
     ) {
         val paddingModifier = Modifier
             .padding(10.dp)
-            .clickable(onClick = { openDetail.add(true) })
+            .clickable(onClick = { onCLickShow(model.id) })
             Card(modifier = paddingModifier) {
-                if(openDetail.get(index = model.index)){
-                    navigateToShowDetail()
-                }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
@@ -210,37 +201,7 @@ fun ListItem(model: TvShowModel) {
                 }
 
             }
-
-
-
-
     }
-}
-
-@Composable
-fun navigateToShowDetail(){
-    val activity = LocalContext.current as Activity
-    activity.startActivity(Intent(activity,TvShowDetailActivity::class.java))
-}
-
-
-@Composable
-fun TvShowDetailScreen(index: Int) {
-    Scaffold(modifier = Modifier.padding(20.dp),
-        content = {it.calculateTopPadding()
-            Box(modifier = Modifier
-                .background(Color.White)
-                .fillMaxSize()
-                .padding(top = 50.dp)) {
-                Text(
-                    text = "Release Date : " + showList.elementAt(index).name,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
-                )
-            }
-        }
-    )
 }
 
 infix fun Int.percentOf(value: Int): Int {

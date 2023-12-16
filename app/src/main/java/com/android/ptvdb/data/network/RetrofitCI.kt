@@ -21,6 +21,7 @@ object RetrofitCI {
     val apiService: APIService = buildRetrofitApi().create(APIService::class.java)
 
 
+
     private fun buildRetrofitApi(
     ): Retrofit {
         val gson = GsonBuilder()

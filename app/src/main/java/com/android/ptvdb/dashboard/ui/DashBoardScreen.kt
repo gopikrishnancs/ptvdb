@@ -26,16 +26,16 @@ import com.android.ptvdb.tvseries.ui.TvShowScreen
 //basic screen class with Basic Retrofit Response to navigate to next screen if the response is success
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun DashBoardScreen() {
+fun DashBoardScreen(navigateToSelectedShow: (Int) -> Unit) {
 
     val authenticationViewModel: AuthViewModel = viewModel(factory = AuthenticationViewModelFactory())
 
-        GetAuth(authenticationViewModel)
+        GetAuth(authenticationViewModel, navigateToSelectedShow)
 
 }
 
 @Composable
-fun GetAuth(authenticationViewModel: AuthViewModel) {
+fun GetAuth(authenticationViewModel: AuthViewModel, navigateToSelectedShow: (Int) -> Unit) {
 
     LaunchedEffect(Unit, block = {
         authenticationViewModel.getAuthentication()
@@ -62,7 +62,7 @@ fun GetAuth(authenticationViewModel: AuthViewModel) {
         }
 
     } else if (authenticationViewModel.isAuthSuccess){
-        TvShowScreen()
+        TvShowScreen(navigateToSelectedShow)
     }
 
 }

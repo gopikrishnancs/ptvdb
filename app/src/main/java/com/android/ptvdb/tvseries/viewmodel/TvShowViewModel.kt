@@ -35,12 +35,6 @@ class TvShowViewModel(val tvRepository: Repository): ViewModel() {
         }
     }
 
-    fun goToDifferentScreen(){
-        viewModelScope.launch {
-            
-        }
-    }
-
 }
 class TvShowViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
