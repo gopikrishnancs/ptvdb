@@ -5,7 +5,6 @@ import com.android.ptvdb.data.datasource.database.DatabaseDataSource
 import com.android.ptvdb.data.datasource.network.DataSource
 import com.android.ptvdb.data.model.TvShows
 import com.android.ptvdb.data.model.TvShowsDetails
-import com.android.ptvdb.tvseries.data.ParticularTvShowResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
