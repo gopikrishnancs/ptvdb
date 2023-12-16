@@ -106,3 +106,4 @@ private fun TvShowEach(tvShow: TvShows, onClickShow: (Int) -> Unit)
 
 
 }
+
