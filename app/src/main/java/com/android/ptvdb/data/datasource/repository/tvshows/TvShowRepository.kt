@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import com.android.ptvdb.data.datasource.database.DatabaseDataSource
 import com.android.ptvdb.data.datasource.network.DataSource
 import com.android.ptvdb.data.model.TvShows
+import com.android.ptvdb.data.model.TvShowsDetails
+import com.android.ptvdb.tvseries.data.ParticularTvShowResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,5 +21,10 @@ class TvShowRepository @Inject constructor(
     fun getTvShowFromDatabase(): LiveData<List<TvShows>> {
         return databaseDataSource.getAllTvShows()
     }
+
+    suspend fun getParticularTvShow(showId: Int): List<TvShowsDetails>{
+        return dataSource.getParticularTvShow(showId)
+    }
+
 }
 

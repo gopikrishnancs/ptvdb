@@ -1,6 +1,7 @@
 package com.android.ptvdb.data.datasource.network
 
 import com.android.ptvdb.data.model.TvShows
+import com.android.ptvdb.data.model.TvShowsDetails
 import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -31,5 +32,33 @@ class RemoteData @Inject constructor() {
             )
         }
         return tvShowList
+    }
+
+    @Throws(Exception::class)
+    fun getParticularTvShowJson(response: String): List<TvShowsDetails> {
+        if (response.isEmpty()) {
+            return emptyList()
+        }
+
+        val tvShowDetailList: MutableList<TvShowsDetails> = ArrayList()
+        val responseJson = JSONObject(response)
+        //val test1 = responseJson.getJSONObject("poster_path")
+        //val test2 = responseJson.getString("backdrop_path")
+        //val test3 = responseJson.get("backdrop_path")
+        //val tvJsonArray = responseJson.getJSONArray("results")
+
+
+            tvShowDetailList.add(
+                TvShowsDetails(
+                    showId = responseJson.getInt("id"),
+                    showName = responseJson.getString("name"),
+                    showPosterUrl = responseJson.getString("poster_path"),
+                    showOverview = responseJson.getString("overview"),
+                    showLanguage = responseJson.getString("original_language")
+                )
+            )
+
+
+        return tvShowDetailList
     }
 }

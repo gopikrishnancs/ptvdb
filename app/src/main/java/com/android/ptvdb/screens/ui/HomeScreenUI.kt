@@ -104,7 +104,7 @@ fun showList(homeItemUiState: HomeItemUiState, navigateToSelectedShow: (Int) -> 
                                     contentDescription = "This is an example image"
                                 )
 
-                                Column {
+                                Column() {
                                     Text(
                                         text = items.showName,
                                         fontSize = 24.sp,

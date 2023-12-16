@@ -14,8 +14,8 @@ class NetworkUrls @Inject constructor() {
         return URL("${BASE_URL}discover/tv?&page=$page&sort_by=popularity.desc?")
     }
 
-    fun getPosterUrl(path : String): URL {
-        return URL("https://image.tmdb.org/t/p/w500/")
+    fun getShowDetails(showId : Int): URL {
+        return URL("${BASE_URL}tv/$showId?language=en-US")
     }
 
 

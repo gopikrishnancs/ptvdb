@@ -1,4 +1,4 @@
-package com.android.ptvdb.screens
+package com.android.ptvdb.screens.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModel @Inject constructor(
+class HomeScreenViewModel @Inject constructor(
     private val repository: TvShowRepository,
 ): ViewModel() {
 

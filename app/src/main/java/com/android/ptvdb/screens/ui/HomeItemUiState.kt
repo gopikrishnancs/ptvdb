@@ -6,7 +6,3 @@ import com.android.ptvdb.data.model.TvShowsDetails
 data class HomeItemUiState(
     var showList: List<TvShows> = emptyList()
 )
-
-data class HomeSheetUIState(
-    var selectedTvShowDetails: TvShowsDetails? = null
-)

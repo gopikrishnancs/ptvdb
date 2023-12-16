@@ -1,6 +1,8 @@
 package com.android.ptvdb.data.datasource.network
 
 import com.android.ptvdb.data.model.TvShows
+import com.android.ptvdb.data.model.TvShowsDetails
+import com.android.ptvdb.tvseries.data.ParticularTvShowResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -17,5 +19,11 @@ class DataSource @Inject constructor(
         val requestUrl = networkUrls.getTvShows()
         val response: String = networkClient.getResponseFromHttpUrl(requestUrl)
         jsonData.getTvShowJson(response)
+    }
+
+    suspend fun getParticularTvShow(showId : Int): List<TvShowsDetails> = withContext(Dispatchers.IO){
+        val requestUrl = networkUrls.getShowDetails(showId)
+        val response: String = networkClient.getResponseFromHttpUrl(requestUrl)
+        jsonData.getParticularTvShowJson(response)
     }
 }
