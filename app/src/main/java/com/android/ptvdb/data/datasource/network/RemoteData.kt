@@ -8,7 +8,6 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteData @Inject constructor() {
-
     @Throws(Exception::class)
     fun getTvShowJson(response: String): List<TvShows> {
 
@@ -21,15 +20,22 @@ class RemoteData @Inject constructor() {
         val tvJsonArray = responseJson.getJSONArray("results")
 
         for (i: Int in 0 until tvJsonArray.length()) {
-            tvShowList.add(
-                TvShows(
-                    showId = tvJsonArray.getJSONObject(i).getInt("id"),
-                    showName = tvJsonArray.getJSONObject(i).getString("name"),
-                    showPosterUrl = tvJsonArray.getJSONObject(i).getString("poster_path"),
-                    showOverview = tvJsonArray.getJSONObject(i).getString("overview"),
-                    showLanguage = tvJsonArray.getJSONObject(i).getString("original_language")
+            try{
+                tvShowList.add(
+                    TvShows(
+                        showId = tvJsonArray.getJSONObject(i).getInt("id"),
+                        showName = tvJsonArray.getJSONObject(i).getString("name"),
+                        showPosterUrl = tvJsonArray.getJSONObject(i).getString("poster_path"),
+                        showOverview = tvJsonArray.getJSONObject(i).getString("overview"),
+                        showLanguage = tvJsonArray.getJSONObject(i).getString("original_language"),
+                        showReleaseDate = tvJsonArray.getJSONObject(i).getString("first_air_date"),
+                        showAverageVote = tvJsonArray.getJSONObject(i).getString("vote_average")
+                    )
                 )
-            )
+            }catch (e:Exception){
+                e.cause
+            }
+
         }
         return tvShowList
     }
@@ -47,17 +53,21 @@ class RemoteData @Inject constructor() {
         //val test3 = responseJson.get("backdrop_path")
         //val tvJsonArray = responseJson.getJSONArray("results")
 
-
+        try {
             tvShowDetailList.add(
                 TvShowsDetails(
                     showId = responseJson.getInt("id"),
                     showName = responseJson.getString("name"),
                     showPosterUrl = responseJson.getString("poster_path"),
                     showOverview = responseJson.getString("overview"),
-                    showLanguage = responseJson.getString("original_language")
+                    showLanguage = responseJson.getString("original_language"),
+                    showReleaseDate = responseJson.getString("first_air_date"),
+                    showAverageVote = responseJson.getString("vote_average")
                 )
             )
-
+        }catch (e:Exception){
+            e.cause
+        }
 
         return tvShowDetailList
     }

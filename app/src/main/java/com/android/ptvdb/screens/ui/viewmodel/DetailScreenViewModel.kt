@@ -30,7 +30,7 @@ class DetailScreenViewModel @Inject constructor(
     }
 
     private suspend fun getTvShowDetails(){
-        detailScreenUiState = DetailItemUiState(detailList = repository.getParticularTvShow(showId))
+        detailScreenUiState = DetailItemUiState(detailList = repository.getParticularTvShow(showId), showResponse = repository.getParticularTvShowFromDatabase(showId))
     }
 }
 

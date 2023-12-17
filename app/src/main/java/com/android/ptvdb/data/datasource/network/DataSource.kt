@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class DataSource @Inject constructor(
     private val jsonData: RemoteData,
     private val networkUrls: NetworkUrls,
-    private val networkClient: NetworkClient
+    private val networkClient: NetworkClient,
 ){
 
     suspend fun getTvShowData() : List<TvShows> = withContext(Dispatchers.IO){
@@ -24,5 +24,17 @@ class DataSource @Inject constructor(
         val requestUrl = networkUrls.getShowDetails(showId)
         val response: String = networkClient.getResponseFromHttpUrl(requestUrl)
         jsonData.getParticularTvShowJson(response)
+    }
+
+    suspend fun getTvShowDataResponse() : String =  withContext(Dispatchers.IO) {
+        val requestUrl = networkUrls.getTvShows()
+        val response: String = networkClient.getResponseFromHttpUrl(requestUrl)
+        response
+    }
+
+    suspend fun getParticularShowResponse(showId : Int): String = withContext(Dispatchers.IO){
+        val requestUrl = networkUrls.getShowDetails(showId)
+        val response: String = networkClient.getResponseFromHttpUrl(requestUrl)
+        response
     }
 }

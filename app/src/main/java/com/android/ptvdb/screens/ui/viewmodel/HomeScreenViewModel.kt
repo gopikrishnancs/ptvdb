@@ -26,6 +26,6 @@ class HomeScreenViewModel @Inject constructor(
     }
 
     private suspend fun getTvShows(){
-        homeScreenItemUiState = HomeItemUiState(showList = repository.getTvShowFromNetwork())
+        homeScreenItemUiState = HomeItemUiState(showList = repository.getTvShowFromNetwork(), showResponse = repository.getTvShowFromDatabase())
     }
 }

@@ -23,4 +23,10 @@ data class TvShowDetailsEntity (
 
     @ColumnInfo(name = "column_show_Language")
     val showLanguage: String,
+
+    @ColumnInfo(name = "column_show_ReleaseDate")
+    val showReleaseDate: String,
+
+    @ColumnInfo(name = "column_show_AverageVote")
+    val showAverageVote: String,
 )

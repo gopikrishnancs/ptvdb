@@ -10,7 +10,9 @@ data class TvShows(
     val showName: String,
     val showPosterUrl: String,
     val showOverview: String,
-    val showLanguage: String
+    val showLanguage: String,
+    val showReleaseDate: String,
+    val showAverageVote: String
 )
 
 fun TvShows.showsAsDatabaseModel(): TvShowEntity {
@@ -19,7 +21,9 @@ fun TvShows.showsAsDatabaseModel(): TvShowEntity {
         showName = this.showName,
         showPosterUrl = this.showPosterUrl,
         showOverview = this.showOverview,
-        showLanguage = this.showLanguage
+        showLanguage = this.showLanguage,
+        showReleaseDate = this.showReleaseDate,
+        showAverageVote = this.showAverageVote
     )
 }
 
@@ -30,7 +34,9 @@ fun List<TvShowEntity>.showsAsDatabaseModel(): List<TvShows> {
             showName = it.showName,
             showPosterUrl = it.showPosterUrl,
             showOverview = it.showOverview,
-            showLanguage = it.showLanguage
+            showLanguage = it.showLanguage,
+            showAverageVote = it.showAverageVote,
+            showReleaseDate = it.showReleaseDate
         )
     }
 }

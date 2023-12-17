@@ -17,12 +17,16 @@ class TvShowRepository @Inject constructor(
         return dataSource.getTvShowData()
     }
 
-    fun getTvShowFromDatabase(): LiveData<List<TvShows>> {
-        return databaseDataSource.getAllTvShows()
+    suspend fun getTvShowFromDatabase(): String {
+        return dataSource.getTvShowDataResponse()
     }
 
     suspend fun getParticularTvShow(showId: Int): List<TvShowsDetails>{
         return dataSource.getParticularTvShow(showId)
+    }
+
+    suspend fun getParticularTvShowFromDatabase(showId: Int): String{
+        return dataSource.getParticularShowResponse(showId)
     }
 
 }
